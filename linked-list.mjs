@@ -177,6 +177,17 @@ class LinkedList {
     currentNode.next = null;
     this.length--;
   }
+
+  search(targetKey) {
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.key === targetKey) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+    return null;
+  }
 }
 
 export default LinkedList;

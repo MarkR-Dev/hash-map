@@ -1,3 +1,4 @@
+import LinkedList from "./linked-list.mjs";
 /* 
 Use the following snippet whenever you access a bucket through an index. 
 We want to throw an error if we try to access an out of bound index:
@@ -24,12 +25,29 @@ class HashMap {
     return hashCode;
   }
 
+  // TODO: implement growing of buckets
   set(key, value) {
     const hashCodeIndex = this.hash(key);
 
     if (hashCodeIndex < 0 || hashCodeIndex >= this.capacity) {
       throw new Error("Trying to access index out of bound");
     }
+
+    if (this.buckets[hashCodeIndex]) {
+      const list = this.buckets[hashCodeIndex];
+      const entry = list.search(key);
+      if (entry) {
+        entry.value = value;
+        return;
+      } else {
+        list.append(key, value);
+      }
+    } else {
+      const list = new LinkedList();
+      list.append(key, value);
+      this.buckets[hashCodeIndex] = list;
+    }
+    this.entries++;
   }
 }
 
