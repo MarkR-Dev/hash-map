@@ -23,6 +23,14 @@ class HashMap {
 
     return hashCode;
   }
+
+  set(key, value) {
+    const hashCodeIndex = this.hash(key);
+
+    if (hashCodeIndex < 0 || hashCodeIndex >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+  }
 }
 
 export default HashMap;
