@@ -9,3 +9,4 @@ Methods used:
 - Get(key)
 - Has(key)
 - Remove(key)
+- Length
