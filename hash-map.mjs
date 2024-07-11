@@ -25,7 +25,7 @@ class HashMap {
     return hashCode;
   }
 
-  // TODO: implement growing of buckets
+  // ** TODO: implement growing of buckets later **
   set(key, value) {
     const hashCodeIndex = this.hash(key);
 
@@ -33,6 +33,7 @@ class HashMap {
       throw new Error("Trying to access index out of bound");
     }
 
+    // Check to see if the bucket at the hash index has a linked list or is empty (undefined)
     if (this.buckets[hashCodeIndex]) {
       const list = this.buckets[hashCodeIndex];
       const entry = list.search(key);
@@ -48,6 +49,24 @@ class HashMap {
       this.buckets[hashCodeIndex] = list;
     }
     this.entries++;
+  }
+
+  get(key) {
+    const hashCodeIndex = this.hash(key);
+
+    if (hashCodeIndex < 0 || hashCodeIndex >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    if (this.buckets[hashCodeIndex]) {
+      const list = this.buckets[hashCodeIndex];
+      const entry = list.search(key);
+      if (entry) {
+        return entry.value;
+      }
+    }
+
+    return null;
   }
 }
 
