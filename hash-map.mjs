@@ -33,7 +33,6 @@ class HashMap {
       throw new Error("Trying to access index out of bound");
     }
 
-    // Check to see if the bucket at the hash index has a linked list or is empty (undefined)
     if (this.buckets[hashCodeIndex]) {
       const list = this.buckets[hashCodeIndex];
       const entry = list.search(key);
@@ -67,6 +66,20 @@ class HashMap {
     }
 
     return null;
+  }
+
+  has(key) {
+    const hashCodeIndex = this.hash(key);
+
+    if (hashCodeIndex < 0 || hashCodeIndex >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    if (this.buckets[hashCodeIndex]) {
+      const list = this.buckets[hashCodeIndex];
+      return list.contains(key);
+    }
+    return false;
   }
 }
 
