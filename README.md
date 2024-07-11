@@ -6,3 +6,6 @@ Methods used:
 
 - Hash(key)
 - Set(key, value)
+- Get(key)
+- Has(key)
+- Remove(key)

@@ -81,6 +81,25 @@ class HashMap {
     }
     return false;
   }
+
+  remove(key) {
+    const hashCodeIndex = this.hash(key);
+
+    if (hashCodeIndex < 0 || hashCodeIndex >= this.capacity) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    const list = this.buckets[hashCodeIndex];
+
+    if (list) {
+      if (list.contains(key)) {
+        list.remove(key);
+        this.entries--;
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 export default HashMap;

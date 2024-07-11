@@ -155,29 +155,6 @@ class LinkedList {
     this.length++;
   }
 
-  removeAt(targetIndex) {
-    if (this.head === null || targetIndex > this.length - 1) {
-      return;
-    } else if (targetIndex === 0) {
-      this.head = this.head.next;
-      this.length--;
-      return;
-    }
-
-    let currentNode = this.head;
-    let prevNode = null;
-    let currentIndex = 0;
-
-    while (currentIndex < targetIndex) {
-      prevNode = currentNode;
-      currentNode = currentNode.next;
-      currentIndex++;
-    }
-    prevNode.next = currentNode.next;
-    currentNode.next = null;
-    this.length--;
-  }
-
   search(targetKey) {
     let currentNode = this.head;
     while (currentNode !== null) {
@@ -187,6 +164,29 @@ class LinkedList {
       currentNode = currentNode.next;
     }
     return null;
+  }
+
+  remove(targetKey) {
+    if (this.head.key === targetKey) {
+      this.head = this.head.next;
+      this.length--;
+      return true;
+    }
+
+    let currentNode = this.head;
+    let prevNode = null;
+
+    while (currentNode !== null) {
+      if (currentNode.key === targetKey) {
+        prevNode.next = currentNode.next;
+        currentNode.next = null;
+        this.length--;
+        return true;
+      }
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+    }
+    return false;
   }
 }
 
