@@ -1,11 +1,5 @@
 import LinkedList from "./linked-list.mjs";
-/* 
-Use the following snippet whenever you access a bucket through an index. 
-We want to throw an error if we try to access an out of bound index:
-if (index < 0 || index >= buckets.length) {
-    throw new Error("Trying to access index out of bound");
-}
-*/
+
 class HashMap {
   constructor() {
     this.capacity = 16;
@@ -14,6 +8,8 @@ class HashMap {
     this.entries = 0;
   }
 
+  // Uses multiplication by a prime number to help distribute entries evenly across all available buckets
+  // Uses modulo to avoid an edge case where JS can't handle precision when dealing with very large numbers
   hash(key) {
     let hashCode = 0;
 
@@ -25,8 +21,11 @@ class HashMap {
     return hashCode;
   }
 
-  // ** TODO: implement growing of buckets later **
   set(key, value) {
+    if (this.entries === this.capacity * this.loadFactor) {
+      this.growBuckets();
+    }
+
     const hashCodeIndex = this.hash(key);
 
     if (hashCodeIndex < 0 || hashCodeIndex >= this.capacity) {
@@ -141,6 +140,16 @@ class HashMap {
       }
     });
     return entriesArray;
+  }
+
+  growBuckets() {
+    const currentEntries = this.getEntries();
+    this.capacity = this.capacity * 2;
+    this.buckets = Array.from(Array(this.capacity));
+    this.entries = 0;
+    currentEntries.forEach((entry) => {
+      this.set(entry[0], entry[1]);
+    });
   }
 }
 

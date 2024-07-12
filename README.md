@@ -14,3 +14,4 @@ Methods used:
 - Keys
 - Values
 - Entries
+- GrowBuckets
