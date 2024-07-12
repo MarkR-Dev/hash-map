@@ -211,6 +211,14 @@ class LinkedList {
     currentNode.next = null;
     this.length--;
   }
+
+  getListData(property, array) {
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      array.push(currentNode[property]);
+      currentNode = currentNode.next;
+    }
+  }
 }
 
 export default LinkedList;

@@ -11,3 +11,4 @@ Methods used:
 - Remove(key)
 - Length
 - Clear
+- Keys

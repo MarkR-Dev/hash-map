@@ -15,5 +15,4 @@ test.set("kite", "pink");
 test.set("lion", "golden");
 
 console.log(test);
-test.clear();
-console.log(test);
+console.log(test.keys());
