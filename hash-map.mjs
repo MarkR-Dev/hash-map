@@ -92,12 +92,13 @@ class HashMap {
     const list = this.buckets[hashCodeIndex];
 
     if (list) {
-      if (list.contains(key)) {
-        list.remove(key);
+      const hasRemoved = list.remove(key);
+      if (hasRemoved) {
         this.entries--;
         return true;
       }
     }
+
     return false;
   }
 
