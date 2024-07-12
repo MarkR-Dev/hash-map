@@ -15,4 +15,4 @@ test.set("kite", "pink");
 test.set("lion", "golden");
 
 console.log(test);
-console.log(test.values());
+console.log(test.getEntries());

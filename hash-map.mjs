@@ -117,7 +117,7 @@ class HashMap {
     const keysArray = [];
     this.buckets.forEach((bucket) => {
       if (bucket) {
-        bucket.getListData("key", keysArray);
+        keysArray.push(...bucket.getListData("key"));
       }
     });
     return keysArray;
@@ -127,10 +127,20 @@ class HashMap {
     const valuesArray = [];
     this.buckets.forEach((bucket) => {
       if (bucket) {
-        bucket.getListData("value", valuesArray);
+        valuesArray.push(...bucket.getListData("value"));
       }
     });
     return valuesArray;
+  }
+
+  getEntries() {
+    const entriesArray = [];
+    this.buckets.forEach((bucket) => {
+      if (bucket) {
+        entriesArray.push(...bucket.getListEntries());
+      }
+    });
+    return entriesArray;
   }
 }
 

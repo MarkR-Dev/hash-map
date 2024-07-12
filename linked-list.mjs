@@ -212,12 +212,24 @@ class LinkedList {
     this.length--;
   }
 
-  getListData(property, array) {
+  getListData(property) {
+    const propertyArray = [];
     let currentNode = this.head;
     while (currentNode !== null) {
-      array.push(currentNode[property]);
+      propertyArray.push(currentNode[property]);
       currentNode = currentNode.next;
     }
+    return propertyArray;
+  }
+
+  getListEntries() {
+    const entries = [];
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      entries.push([currentNode.key, currentNode.value]);
+      currentNode = currentNode.next;
+    }
+    return entries;
   }
 }
 

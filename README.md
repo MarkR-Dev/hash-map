@@ -13,3 +13,4 @@ Methods used:
 - Clear
 - Keys
 - Values
+- Entries
