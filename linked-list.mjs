@@ -188,6 +188,29 @@ class LinkedList {
     }
     return false;
   }
+
+  removeAt(targetIndex) {
+    if (this.head === null || targetIndex > this.length - 1) {
+      return;
+    } else if (targetIndex === 0) {
+      this.head = this.head.next;
+      this.length--;
+      return;
+    }
+
+    let currentNode = this.head;
+    let prevNode = null;
+    let currentIndex = 0;
+
+    while (currentIndex < targetIndex) {
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+      currentIndex++;
+    }
+    prevNode.next = currentNode.next;
+    currentNode.next = null;
+    this.length--;
+  }
 }
 
 export default LinkedList;

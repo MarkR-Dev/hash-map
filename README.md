@@ -10,3 +10,4 @@ Methods used:
 - Has(key)
 - Remove(key)
 - Length
+- Clear

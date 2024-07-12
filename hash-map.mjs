@@ -105,6 +105,30 @@ class HashMap {
   length() {
     return this.entries;
   }
+
+  clear() {
+    // set new array with capacity set back to starting value of 16 buckets
+    this.capacity = 16;
+    this.buckets = Array.from(Array(this.capacity));
+
+    // loop through buckets array and set each list head to null
+    // this.buckets.forEach((bucket) => {
+    //   if (bucket) {
+    //     bucket.head = null;
+    //     bucket.length = 0;
+    //   }
+    // });
+
+    // loop through buckets array, loop through each list and remove each element
+    // this.buckets.forEach((bucket) => {
+    //   if (bucket) {
+    //     while (bucket.head !== null) {
+    //       bucket.removeAt(0);
+    //     }
+    //   }
+    // });
+    this.entries = 0;
+  }
 }
 
 export default HashMap;
