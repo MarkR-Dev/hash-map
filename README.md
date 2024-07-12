@@ -12,3 +12,4 @@ Methods used:
 - Length
 - Clear
 - Keys
+- Values

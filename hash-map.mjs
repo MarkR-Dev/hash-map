@@ -106,7 +106,7 @@ class HashMap {
     return this.entries;
   }
 
-  // set new array with capacity set back to starting value of 16 buckets to reduce wasted space
+  // create new array with capacity set back to starting value of 16 buckets to reduce wasted space
   clear() {
     this.capacity = 16;
     this.buckets = Array.from(Array(this.capacity));
@@ -121,6 +121,16 @@ class HashMap {
       }
     });
     return keysArray;
+  }
+
+  values() {
+    const valuesArray = [];
+    this.buckets.forEach((bucket) => {
+      if (bucket) {
+        bucket.getListData("value", valuesArray);
+      }
+    });
+    return valuesArray;
   }
 }
 
