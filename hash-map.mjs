@@ -22,12 +22,7 @@ class HashMap {
   }
 
   set(key, value) {
-    if (this.entries === this.capacity * this.loadFactor) {
-      this.growBuckets();
-    }
-
     const hashCodeIndex = this.hash(key);
-
     if (hashCodeIndex < 0 || hashCodeIndex >= this.capacity) {
       throw new Error("Trying to access index out of bound");
     }
@@ -46,7 +41,12 @@ class HashMap {
       list.append(key, value);
       this.buckets[hashCodeIndex] = list;
     }
+
     this.entries++;
+
+    if (this.entries > this.capacity * this.loadFactor) {
+      this.growBuckets();
+    }
   }
 
   get(key) {

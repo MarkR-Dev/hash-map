@@ -15,5 +15,5 @@ test.set("kite", "pink");
 test.set("lion", "golden");
 
 console.log(test);
-test.set("bear", "big");
+test.set("moon", "silver");
 console.log(test);
