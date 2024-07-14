@@ -1,6 +1,6 @@
 # hash-map
 
-Project to practice creating and using a hash map in JS.
+Project to practice creating and using a hash map and hash set in JS.
 
 Methods used:
 
@@ -15,3 +15,5 @@ Methods used:
 - Values
 - Entries
 - GrowBuckets
+
+Implemented extra credit hash set.

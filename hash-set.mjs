@@ -1,6 +1,6 @@
 import LinkedList from "./linked-list.mjs";
 
-class HashMap {
+class HashSet {
   constructor() {
     this.capacity = 16;
     this.loadFactor = 0.75;
@@ -8,8 +8,6 @@ class HashMap {
     this.entries = 0;
   }
 
-  // Uses multiplication by a prime number to help distribute entries evenly across all available buckets
-  // Uses modulo to avoid an edge case where JS can't handle precision when dealing with very large numbers
   hash(key) {
     let hashCode = 0;
 
@@ -21,7 +19,7 @@ class HashMap {
     return hashCode;
   }
 
-  set(key, value) {
+  set(key) {
     const hashCodeIndex = this.hash(key);
     if (hashCodeIndex < 0 || hashCodeIndex >= this.capacity) {
       throw new Error("Trying to access index out of bound");
@@ -31,14 +29,13 @@ class HashMap {
       const list = this.buckets[hashCodeIndex];
       const entry = list.search(key);
       if (entry) {
-        entry.value = value;
         return;
       } else {
-        list.append({ key, value });
+        list.append(key);
       }
     } else {
       const list = new LinkedList();
-      list.append({ key, value });
+      list.append(key);
       this.buckets[hashCodeIndex] = list;
     }
 
@@ -60,7 +57,7 @@ class HashMap {
       const list = this.buckets[hashCodeIndex];
       const entry = list.search(key);
       if (entry) {
-        return entry.value;
+        return entry.key;
       }
     }
 
@@ -105,7 +102,6 @@ class HashMap {
     return this.entries;
   }
 
-  // create new array with capacity set back to starting value of 16 buckets to reduce wasted space
   clear() {
     this.capacity = 16;
     this.buckets = Array.from(Array(this.capacity));
@@ -122,35 +118,15 @@ class HashMap {
     return keysArray;
   }
 
-  values() {
-    const valuesArray = [];
-    this.buckets.forEach((bucket) => {
-      if (bucket) {
-        valuesArray.push(...bucket.getListData("value"));
-      }
-    });
-    return valuesArray;
-  }
-
-  getEntries() {
-    const entriesArray = [];
-    this.buckets.forEach((bucket) => {
-      if (bucket) {
-        entriesArray.push(...bucket.getListEntries());
-      }
-    });
-    return entriesArray;
-  }
-
   growBuckets() {
-    const currentEntries = this.getEntries();
+    const currentKeys = this.keys();
     this.capacity = this.capacity * 2;
     this.buckets = Array.from(Array(this.capacity));
     this.entries = 0;
-    currentEntries.forEach((entry) => {
-      this.set(entry[0], entry[1]);
+    currentKeys.forEach((key) => {
+      this.set(key);
     });
   }
 }
 
-export default HashMap;
+export default HashSet;

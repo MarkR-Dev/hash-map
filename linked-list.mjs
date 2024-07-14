@@ -5,10 +5,11 @@ class LinkedList {
     this.head = null;
     this.length = 0;
   }
-
-  // Point head to new node if the list is empty or loop until the tail and append
-  append(key, value) {
-    const newNode = new Node(key, value);
+  append(data) {
+    if (typeof data !== "object") {
+      data = { key: data };
+    }
+    const newNode = new Node(data);
     if (this.head === null) {
       this.head = newNode;
     } else {
@@ -21,9 +22,11 @@ class LinkedList {
     this.length++;
   }
 
-  // Assign the new node's next pointer to the current head and point the head at the new node
-  prepend(key, value) {
-    const newNode = new Node(key, value);
+  prepend(data) {
+    if (typeof data !== "object") {
+      data = { key: data };
+    }
+    const newNode = new Node(data);
     if (this.head === null) {
       this.head = newNode;
     } else {
@@ -33,7 +36,6 @@ class LinkedList {
     this.length++;
   }
 
-  // Returns the current length of the list, increments an object instance length property over traversing the list and counting repeatedly
   size() {
     return this.length;
   }
@@ -54,8 +56,6 @@ class LinkedList {
     return currentNode;
   }
 
-  // Check to see if the list is empty or if the targeted index is below/above the bounds of the list
-  // List index begins at 0, and an empty list has a 0 length property so minus 1 to account for that
   at(targetIndex) {
     if (targetIndex < 0 || targetIndex > this.length - 1) {
       return null;
@@ -132,13 +132,16 @@ class LinkedList {
 
   // Check for empty list or trying to insert out of upper bounds first,
   // otherwise traverse until before the insertion index and swap next node referencess for respective nodes
-  insertAt(key, value, targetIndex) {
-    const newNode = new Node(key, value);
+  insertAt(data, targetIndex) {
+    if (typeof data !== "object") {
+      data = { key: data };
+    }
+    const newNode = new Node(data);
     if (this.head === null || targetIndex > this.length - 1) {
-      this.append(key, value);
+      this.append(data);
       return;
     } else if (targetIndex === 0) {
-      this.prepend(key, value);
+      this.prepend(data);
       return;
     }
     let prevNode = null;

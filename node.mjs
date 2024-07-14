@@ -1,7 +1,8 @@
 class Node {
-  constructor(key = null, value = null) {
-    this.key = key;
-    this.value = value;
+  constructor({ ...data } = {}) {
+    for (const [key, value] of Object.entries(data)) {
+      this[key] = value;
+    }
     this.next = null;
   }
 }
